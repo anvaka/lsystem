@@ -1,4 +1,4 @@
-import {createScene, createGuide} from 'w-gl';
+import {createScene, createGuide, toSVG} from 'w-gl';
 import LSystem from './LSystem';
 
 export default function createLScene(canvas) {
@@ -23,6 +23,34 @@ export default function createLScene(canvas) {
   return {
     dispose,
     setSystem,
+    saveToSVG
+  }
+
+  function saveToSVG(fileName) {
+    let svg = toSVG(scene, {
+      open() {
+        return `<!-- Generator: https://github.com/anvaka/l-system -->`;
+      }
+    });
+    let blob = new Blob([svg], {type: "image/svg+xml"});
+    let url = window.URL.createObjectURL(blob);
+    // For some reason, safari doesn't like when download happens on the same
+    // event loop cycle. Pushing it to the next one.
+    setTimeout(() => {
+      let a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      revokeLater(url);
+    }, 30)
+  }
+
+  function revokeLater(url) {
+    // In iOS immediately revoked URLs cause "WebKitBlobResource error 1." error
+    // Setting a timeout to revoke URL in the future fixes the error:
+    setTimeout(() => {
+      window.URL.revokeObjectURL(url);
+    }, 45000);
   }
 
   function setSystem(newSystem) {

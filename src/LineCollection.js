@@ -1,10 +1,10 @@
 import {GLCollection, defineProgram, InstancedAttribute, ColorAttribute} from 'w-gl';
 
 export default class LineCollection extends GLCollection {
-    constructor(gl, options = {}) {
-      let program = defineProgram({
-        gl,
-        vertex: `
+  constructor(gl, options = {}) {
+    let program = defineProgram({
+      gl,
+      vertex: `
     uniform mat4 modelViewProjection;
     uniform float width;
     uniform vec2 resolution;
@@ -37,37 +37,62 @@ export default class LineCollection extends GLCollection {
       vColor = color.abgr; // mix(.abgr, aToColor.abgr, aPosition.y);
     }`,
 
-        fragment: `
+      fragment: `
     precision highp float;
     varying vec4 vColor;
 
     void main() {
       gl_FragColor = vColor;
     }`,
-        attributes: {
-          color: new ColorAttribute()
-        },
-        instanced: {
-          point: new InstancedAttribute([
-            -0.5, 0, -0.5, 1, 0.5, 1, // First 2D triangle of the quad
-            -0.5, 0, 0.5, 1, 0.5, 0   // Second 2D triangle of the quad
-          ])
-        }
-      });
-      super(program);
-      this.width = options.width || 2;
-    }
-
-    draw(_, drawContext) {
-      if (!this.uniforms) {
-        this.uniforms = {
-          modelViewProjection: this.modelViewProjection,
-          width: this.width,
-          resolution: [drawContext.width, drawContext.height]
-        }
+      attributes: {
+        color: new ColorAttribute()
+      },
+      instanced: {
+        point: new InstancedAttribute([
+          -0.5, 0, -0.5, 1, 0.5, 1, // First 2D triangle of the quad
+          -0.5, 0, 0.5, 1, 0.5, 0   // Second 2D triangle of the quad
+        ])
       }
-      this.uniforms.resolution[0] = drawContext.width;
-      this.uniforms.resolution[1] = drawContext.height;
-      this.program.draw(this.uniforms);
+    });
+    super(program);
+    this.width = options.width || 2;
+  }
+
+  draw(_, drawContext) {
+    if (!this.uniforms) {
+      this.uniforms = {
+        modelViewProjection: this.modelViewProjection,
+        width: this.width,
+        resolution: [drawContext.width, drawContext.height]
+      }
     }
+    this.uniforms.resolution[0] = drawContext.width;
+    this.uniforms.resolution[1] = drawContext.height;
+    this.program.draw(this.uniforms);
+  }
+
+  // implement lineRenderTrait to allow SVG export via w-gl
+  forEachLine(cb) {
+    let count = this.program.getCount()
+    for (let i = 0; i < count; ++i) {
+      let vertex = this.program.get(i);
+      let from = { x: vertex.from[0], y: vertex.from[1], z: vertex.from[2], color: vertex.color }
+      let to = { x: vertex.to[0], y: vertex.to[1], z: vertex.to[2], color: vertex.color }
+      cb(from, to);
+    }
+  }
+
+  getLineColor(from) {
+    let count = this.program.getCount()
+    let c = from ? 
+              from.color :  
+              count > 0 ? this.program.get(0).color : 0xFFFFFFFF;
+
+    return [
+      (c >> 24) & 0xFF / 255,
+      (c >> 16) & 0xFF / 255,
+      (c >>  8) & 0xFF / 255,
+      (c >>  0) & 0xFF / 255,
+    ]
+  }
 }
