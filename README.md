@@ -1,4 +1,4 @@
-# l-system
+# L-System
 
 This website allows you to edit [L-System](https://en.wikipedia.org/wiki/L-system) and immediately see results online:
 
