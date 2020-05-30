@@ -8,7 +8,7 @@ export default class LSystem {
     this.rules = systemSettings.rules;
     this.actions = compileActions(systemSettings, this);
     this.turtle = new Turtle(scene, systemSettings);
-    this.stepsPerFrame = systemSettings.stepsperframe || 42;
+    this.stepsPerFrame = systemSettings.stepsPerFrame || 42;
 
     const depth = Number.isFinite(systemSettings.depth) ? systemSettings.depth : 5;
     let start = systemSettings.start;

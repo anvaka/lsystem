@@ -54,7 +54,7 @@
         <code-editor v-if='codeEditorModel' :model='codeEditorModel' class='code-editor-container'></code-editor>
 </div>
         <div class='section border-top'>
-        <p>This website renders the L-System defined above. The website was created by <a href='https://twitter.com/anvaka'>@anvaka</a>.</p>
+        <p>This website renders any L-Systems defined above. The website was created by <a href='https://twitter.com/anvaka'>@anvaka</a>.</p>
         <p>You can find the entire source code <a href='https://github.com/anvaka/lsystem'>here</a>. 
         If you love this website you can also <a href='https://www.paypal.com/paypalme2/anvakos/3'>buy me a coffee</a>
         </p>
@@ -116,9 +116,6 @@ border-color = #0d3f71;
   max-height: 100%;
   position: absolute;
   z-index: 1;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
   background: window-background;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
