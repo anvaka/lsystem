@@ -63,7 +63,7 @@ export default function createLScene(canvas) {
     let wantGuideToBeHidden = false;
     lSystem = [];
     newSystem.forEach(systemSettings => {
-      if (systemSettings.hidegrid) {
+      if (systemSettings.hideGrid) {
         wantGuideToBeHidden = true;
       }
       lSystem.push(new LSystem(scene, systemSettings));
