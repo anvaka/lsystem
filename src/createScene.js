@@ -3,7 +3,9 @@ import LSystem from './LSystem';
 
 export default function createLScene(canvas) {
   let scene = createScene(canvas);
-  let guide = createGuide(scene);
+  let guide = createGuide(scene, {
+    lineColor: 0x0d3f71ff
+  });
 
   scene.setClearColor(12/255, 41/255, 82/255, 1)
   let initialSceneSize = 40;

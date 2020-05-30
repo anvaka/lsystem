@@ -2,6 +2,7 @@
 <div>
   <codemirror v-model='model.code' ref='editor' :options="{
     viewportMargin: Infinity,
+    theme: 'lsystem',
     mode: 'application/lsystem',
   }"></codemirror>
   <div class='error-container' v-if='model.error'>

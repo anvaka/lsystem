@@ -29,6 +29,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       axiom: kw('axiom'),
       angle: kw('angle'),
       start: kw('start'),
+      direction: kw('direction'),
+      position: kw('position'),
       hideGrid: kw('hideGrid'),
       rules: kw('rules'),
       depth: kw('depth'),

@@ -1,5 +1,4 @@
-const grammar = require('../src/grammar/grammar')
-const nearley = require('nearley');
+import parseExpression from './grammar/parser';
 const queryState = require('query-state');
 
 var qs = queryState({
@@ -24,6 +23,7 @@ axiom: X
 rules:
  X => X+YF++YF-FX--FXFX-YF+
  Y => -FX+YFYF++YF+FX--FX-Y 
+
 angle: 60`,
 
 `// Peano curve
@@ -31,6 +31,7 @@ axiom: X
 rules: 
  X => XFYFX-F-YFXFY+F+XFYFX
  Y => YFXFY+F+XFYFX-F-YFXFY
+
 angle: 90`,
 `// Square Sierpinski
 axiom: F+XF+F+XF
@@ -46,6 +47,7 @@ rules:
  F => FF
  X => F-[[X]+X]+F[+FX]-X
 
+direction: [0, 1, 0]
 angle: 22.5`,
 `// Hilbert curve
 axiom: X
@@ -54,6 +56,7 @@ rules:
  Y => +XF-YFY-FX+
 
 angle: 90`,
+
 `// blocks
 axiom: F+F+F+F
 rules: 
@@ -62,8 +65,7 @@ rules:
 
 angle: 90
 depth: 3 `,
-`
-// 3 Blocks
+`// 3 Blocks
 axiom: F^^F^^F
 rules: 
  F => F-fff^F^^F^^F&&fff-FFF
@@ -71,11 +73,25 @@ rules:
 
 depth: 3
 actions:
- + => rotate(90)
  - => rotate(-90)
  ^ => rotate(60)
  & => rotate(-60)
-`
+`, `// Leaf
+axiom: Y---Y
+rules: 
+ X => F-FF-F--[--X]F-FF-F--F-FF-F--
+ Y => f-F+X+F-fY
+
+depth: 8
+angle: 60`, `// esum
+axiom: X+X+X+X+X+X+X+X
+rules: 
+ X => [F[-X++Y]]
+ Y => [F[-Y--X]]
+ F => F
+
+depth: 6
+angle: -45`
   ]
 
 export default function getCodeModel(scene) {
@@ -85,23 +101,17 @@ export default function getCodeModel(scene) {
     randomize,
     code: qs.get('code')
   }
+  let lastPickedIndex = -1;
 
   setCode(model.code);
 
   return model;
 
   function randomize() {
-//     let sys = getRandomSystem(6 + Math.round(Math.random() * 10))
-//     let code = `axiom: XY
-// rules: 
-//  X => ${sys.X}
-//  Y => ${sys.Y}
-
-// angle: ${sys.angle} 
-// depth: 5 
-// stepsPerFrame: -1`
-    
-    let code = pickRandom(standardCollection);
+    let index;
+    do { index = pickRandomIndex(standardCollection) } while (index === lastPickedIndex);
+    lastPickedIndex = index;
+    let code = standardCollection[lastPickedIndex];
     setCode(code);
     model.ignoreNextUpdate = true;
     model.code = code;
@@ -114,7 +124,7 @@ export default function getCodeModel(scene) {
       return;
     }
     try {
-      let system = getParsedSystem(newCode);
+      let system = parseExpression(newCode);
       if (system) {
         // TODO: I messed up with grammar, and seems like string value takes precedence over
         // axiom clause. A little hack here to put them back on the same page until better fix:
@@ -128,21 +138,6 @@ export default function getCodeModel(scene) {
     } catch (e) {
       model.error = e.message;
     }
-  }
-}
-
-function getParsedSystem(newCode) {
-  try {
-    const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
-    parser.feed(newCode);
-    let parserResults = parser.finish()[0];
-    return parserResults && parserResults[0]
-  } catch (e) {
-    let lines = e.message.split('\n')
-    let head = lines.slice(0, 4).join('\n')
-    let err = new Error(head)
-    err.details = lines.slice(1)
-    throw err;
   }
 }
 
@@ -209,6 +204,6 @@ function getRandomSystem(length) {
   }
 }
 
-function pickRandom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function pickRandomIndex(arr) {
+  return Math.floor(Math.random() * arr.length);
 }
