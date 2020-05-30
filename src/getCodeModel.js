@@ -1,19 +1,26 @@
 const grammar = require('../src/grammar/grammar')
 const nearley = require('nearley');
+const queryState = require('query-state');
+
+var qs = queryState({
+  code: getInitialCode()
+}, {
+  useSearch: true
+});
 
 // Create a Parser object from our grammar.
 let standardCollection = [
 `// dragon curve
-axiom: FX
+axiom: X
 rules: 
  X => X+YF+
  Y => -FX-Y
 
-maxDepth: 10
+depth: 10
 angle: 90`,
 
 `// Hexagonal Gosper
-axiom: XF
+axiom: X
 rules:
  X => X+YF++YF-FX--FXFX-YF+
  Y => -FX+YFYF++YF+FX--FX-Y 
@@ -28,9 +35,9 @@ angle: 90`,
 `// Square Sierpinski
 axiom: F+XF+F+XF
 rules: 
-  X => XF-F+F-XF+F+XF-F+F-X
+ X => XF-F+F-XF+F+XF-F+F-X
 
-maxDepth: 4
+depth: 4
 angle: 90
 `,
 `// Tree
@@ -40,6 +47,35 @@ rules:
  X => F-[[X]+X]+F[+FX]-X
 
 angle: 22.5`,
+`// Hilbert curve
+axiom: X
+rules: 
+ X => -YF+XFX+FY-
+ Y => +XF-YFY-FX+
+
+angle: 90`,
+`// blocks
+axiom: F+F+F+F
+rules: 
+ F => F-f+FF-FF-FF-FFf-FFFF
+ f => ffffff
+
+angle: 90
+depth: 3 `,
+`
+// 3 Blocks
+axiom: F^^F^^F
+rules: 
+ F => F-fff^F^^F^^F&&fff-FFF
+ f => fff
+
+depth: 3
+actions:
+ + => rotate(90)
+ - => rotate(-90)
+ ^ => rotate(60)
+ & => rotate(-60)
+`
   ]
 
 export default function getCodeModel(scene) {
@@ -47,7 +83,7 @@ export default function getCodeModel(scene) {
     setCode,
     error: null,
     randomize,
-    code: getInitialCode(),
+    code: qs.get('code')
   }
 
   setCode(model.code);
@@ -62,7 +98,7 @@ export default function getCodeModel(scene) {
 //  Y => ${sys.Y}
 
 // angle: ${sys.angle} 
-// maxDepth: 5 
+// depth: 5 
 // stepsPerFrame: -1`
     
     let code = pickRandom(standardCollection);
@@ -85,6 +121,7 @@ export default function getCodeModel(scene) {
         if (system.axiom) system.start = system.axiom;
         scene.setSystem(system);
         model.error = null;
+        qs.set('code', newCode);
       } else {
         model.error = 'Could not parse the input string';
       }
@@ -116,7 +153,7 @@ rules:
   X => -YF+XFX+FY-
   Y => +XF-YFY-FX+
 
-maxDepth: 5
+depth: 5
 stepsPerFrame: 10
 width: 2
 color: #FFFFFF

@@ -10,11 +10,12 @@ export default class LSystem {
     this.turtle = new Turtle(scene, systemSettings);
     this.stepsPerFrame = systemSettings.stepsperframe || 42;
 
-    const maxDepth = Number.isFinite(systemSettings.maxdepth) ? systemSettings.maxdepth : 5;
+    const depth = Number.isFinite(systemSettings.depth) ? systemSettings.depth : 5;
     let start = systemSettings.start;
     if (start === undefined) start = Object.keys(this.rules)[0];
     if (start === undefined) throw new Error('System does not have neither rewrite rules nor start state');
-    this.iterator = this.curve(maxDepth + 1, start);
+    this.depth = depth + 1;
+    this.iterator = this.curve(this.depth, start);
   }
 
   dispose() {
@@ -37,18 +38,21 @@ export default class LSystem {
       return;
     }
 
+    // let level = [];
     for (let op of rule) {
       if (this.actions[op]) {
+        // level.push(op)
         if (this.stepsPerFrame < 0) {
-          yield* this.actions[op]();
+          yield* this.actions[op](this.depth);
         } else {
-          yield this.actions[op]();
+          yield this.actions[op](this.depth);
         }
       }
       let rewriteRule = this.rules[op];
       if (!rewriteRule) continue;
       yield* this.curve(order - 1, rewriteRule)
     }
+    //console.log('level ' + order + ': ' + level.join(''))
   }
 }
 
@@ -95,7 +99,9 @@ function turtleCanDo(command, lSystem) {
 
   if (command.name === 'draw') {
     let length = getLength(command.args[0], 'draw');
-    return function() {lSystem.turtle.draw(length)}
+    return function() {
+      lSystem.turtle.draw(length)
+    }
   }
 
   if (command.name === 'push') return function() {lSystem.turtle.push()}
@@ -120,9 +126,19 @@ function getLength(value, name) {
 function coerceTypes(system) {
   if (system.angle !== undefined) system.angle = Number.parseFloat(system.angle);
   if (system.width !== undefined) system.width = Number.parseFloat(system.width);
-  if (system.maxdepth !== undefined) system.maxdepth = Number.parseFloat(system.maxdepth);
+  if (system.depth !== undefined) system.depth = Number.parseFloat(system.depth);
   if (system.color !== undefined) {
     let rgba = tinycolor(system.color).toRgb();
     system.color = (rgba.r << 24) | (rgba.g << 16) | (rgba.b << 8) | (rgba.a * 255 | 0)
   } 
+}
+
+function unwrapRule(start, system) {
+  let result = [];
+  for (let ch of start) {
+    let unwrapped = system.rules[ch] || ch;
+    result.push(unwrapped);
+  }
+
+  return result.join('');
 }

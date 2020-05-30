@@ -70,8 +70,8 @@ export default {
     this.$refs.editor.editor.setOption('extraKeys', {
       'Cmd-/': toggleComment,
       'Ctrl-/': toggleComment,
-      'Up': handleUp,
-      'Down': handleDown
+      'Shift-Up': handleUp,
+      'Shift-Down': handleDown
     });
   },
 
