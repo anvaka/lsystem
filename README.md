@@ -21,7 +21,18 @@ results.
 
 L-Systems are described very well on [Paul Bourke's](http://paulbourke.net/fractals/lsys/) website.
 
-### List of available sections in the editor:
+### Sections in the editor
+
+Each section can be entered in the text editor, followed by a semicolon. For example:
+
+```
+axiom: X
+rules:
+  X => F+F
+```
+
+Here we entered two sections: `axiom` and `rules`. The list of available sections, along with their
+meanings is below:
 
 * `axiom` - initial state of the system
 * `rules` - list of rewrite rules that are applied on each iteration
@@ -34,7 +45,36 @@ L-Systems are described very well on [Paul Bourke's](http://paulbourke.net/fract
 * `direction` - three numbers separated by coma `x, y, z` that set initial direction
 * `position` three numbers separated by coma `x, y, z` that set initial position
 
-### List of  The following is the list of available actions:
+### Actions
+
+Actions are associated with each symbol in the `rules` section. When processor finds matching action
+it executes it.
+
+For example, let's say we have the following system:
+
+```
+axiom: X
+rules:
+  X => F+FX
+
+depth: 4
+actions:
+  F => draw(10)
+  + => rotate(90)
+```
+
+Once the system is unwrapped, we get the following string: 
+
+```
+F+FF+FF+FF+F
+```
+
+Each `F` has an associated action `draw(10)` which means "draw 10 units in current direction".
+Each `+` has an associated action `rotate(90)` which means "rotate 90 degrees".
+
+Can you guess what `F+FF+FF+FF+F` will render? To see the final result, [click here](https://anvaka.github.io/lsystem/?code=axiom%3A%20X%0Arules%3A%0A%20%20X%20%3D%3E%20F%2BFX%0A%0Adepth%3A%204%0Aactions%3A%0A%20%20F%20%3D%3E%20draw%2810%29%0A%20%20%2B%20%3D%3E%20rotate%2890%29)
+
+Here is the list of all available actions:
 
 `draw(x)` draw `x` units in current direction
 `move(x)` move `x` units in current direction without drawing
