@@ -23,7 +23,7 @@
                   <li><strong>move(x)</strong> move <code>x</code> units in current direction without drawing</li>
                   <li><strong>rotate(deg)</strong>  rotate current direction <code>deg</code> degrees around Z axis</li>
                   <li><strong>rotateX(deg)</strong> rotate current direction <code>deg</code> degrees around X axis</li>
-                  <li><strong>rotateY(deg)</strong> rotate current direction <code>deg</code> degrees around Z axis</li>
+                  <li><strong>rotateY(deg)</strong> rotate current direction <code>deg</code> degrees around Y axis</li>
                   <li><strong>push()</strong> saves current render state onto stack</li>
                   <li><strong>pop()</strong> restores previously saved render state</li>
                 </ul>

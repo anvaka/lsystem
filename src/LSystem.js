@@ -132,13 +132,3 @@ function coerceTypes(system) {
     system.color = (rgba.r << 24) | (rgba.g << 16) | (rgba.b << 8) | (rgba.a * 255 | 0)
   } 
 }
-
-function unwrapRule(start, system) {
-  let result = [];
-  for (let ch of start) {
-    let unwrapped = system.rules[ch] || ch;
-    result.push(unwrapped);
-  }
-
-  return result.join('');
-}
