@@ -91,7 +91,19 @@ rules:
  F => F
 
 depth: 6
-angle: -45`
+angle: -45`,
+`// Penrose tiling
+axiom: [N]++[N]++[N]++[N]++[N]
+rules: 
+  M => OF++PF----NF[-OF----MF]++
+  N => +OF--PF[---MF--NF]+
+  O => -MF++NF[+++OF++PF]-
+  P => --OF++++MF[+PF++++NF]--NF
+  F => 
+
+depth: 4
+angle: 36
+`
   ]
 
 export default function getCodeModel(scene) {
