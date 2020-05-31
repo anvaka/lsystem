@@ -18,6 +18,7 @@ export default function createLScene(canvas) {
 
   let canDrawMore = false;
   let lSystem = [];
+  let disposeLater;
   let raf = requestAnimationFrame(frame);
 
   return {
@@ -55,7 +56,11 @@ export default function createLScene(canvas) {
 
   function setSystem(newSystem) {
     cancelAnimationFrame(raf);
-    lSystem.forEach(l => l.dispose());
+    if (disposeLater) {
+      lSystem.forEach(l => disposeLater.push(l));
+    } else {
+      disposeLater = lSystem;
+    }
 
     if (!Array.isArray(newSystem)) {
       newSystem = [newSystem]
@@ -84,6 +89,10 @@ export default function createLScene(canvas) {
     lSystem.forEach(drawSystem);
     if (canDrawMore) {
       raf = requestAnimationFrame(frame);
+    }
+    if (disposeLater) {
+      disposeLater.forEach(l => l.dispose())
+      disposeLater = null;
     }
   }
 
