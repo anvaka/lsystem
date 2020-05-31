@@ -4,18 +4,21 @@ import tinycolor from 'tinycolor2';
 export default class LSystem {
   constructor(scene, systemSettings) {
     coerceTypes(systemSettings);
-    // this.rewrite = compileRules(systemSettings.rewrite, systemSettings.start, this);
     this.rules = systemSettings.rules;
     this.actions = compileActions(systemSettings, this);
     this.turtle = new Turtle(scene, systemSettings);
     this.stepsPerFrame = systemSettings.stepsPerFrame || 42;
+    this.drawQueue = [];
+    this.lastDrawnIndex = -1;
 
     const depth = Number.isFinite(systemSettings.depth) ? systemSettings.depth : 5;
     let start = systemSettings.start;
     if (start === undefined) start = Object.keys(this.rules)[0];
     if (start === undefined) throw new Error('System does not have neither rewrite rules nor start state');
-    this.depth = depth + 1;
-    this.iterator = this.curve(this.depth, start);
+    this.start = start;
+    this.depth = depth;
+    this.simulate(); // TODO: Might exhaust system resources
+    this.iterator = this.renderIterator();
   }
 
   dispose() {
@@ -30,29 +33,37 @@ export default class LSystem {
     return !next.done;
   }
 
-  *curve(order, rule) {
-    if (order === 0) {
-      // if (this.actions[action]) {
-      //   this.actions[action]();
-      // }
-      return;
+  simulate() {
+    let production = this.start;
+    let index = 0;
+    while (index < this.depth) {
+      production = this.iterateRules(production);
+      index += 1;
     }
 
-    // let level = [];
+    this.production = production;
+  }
+
+  iterateRules(rule) {
+    let result = [];
     for (let op of rule) {
+      let rewriteRule = this.rules[op];
+      if (rewriteRule !== undefined) result.push(rewriteRule);
+      else result.push(op);
+    }
+    return result.join('');
+  }
+
+  *renderIterator() {
+    for (let op of this.production) {
       if (this.actions[op]) {
-        // level.push(op)
         if (this.stepsPerFrame < 0) {
-          yield* this.actions[op](this.depth);
+          yield* this.actions[op]();
         } else {
-          yield this.actions[op](this.depth);
+          yield this.actions[op]();
         }
       }
-      let rewriteRule = this.rules[op];
-      if (!rewriteRule) continue;
-      yield* this.curve(order - 1, rewriteRule)
     }
-    //console.log('level ' + order + ': ' + level.join(''))
   }
 }
 
