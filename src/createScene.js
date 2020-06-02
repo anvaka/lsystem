@@ -24,7 +24,8 @@ export default function createLScene(canvas) {
   return {
     dispose,
     setSystem,
-    saveToSVG
+    saveToSVG,
+    isComplete,
   }
 
   function saveToSVG(fileName) {
@@ -82,6 +83,10 @@ export default function createLScene(canvas) {
     }
 
     raf = requestAnimationFrame(frame);
+  }
+
+  function isComplete() {
+    return lSystem.every(x => x.complete);
   }
 
   function frame() {

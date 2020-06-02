@@ -142,7 +142,11 @@ export default function getCodeModel(scene) {
         // axiom clause. A little hack here to put them back on the same page until better fix:
         if (system.axiom) system.start = system.axiom;
         scene.setSystem(system);
-        model.error = null;
+        if (scene.isComplete()) {
+          model.error = null;
+        } else {
+          model.error = 'The system limit reached.\nRendering first 1,000,000 characters'
+        }
         qs.set('code', newCode);
       } else {
         model.error = 'Could not parse the input string';

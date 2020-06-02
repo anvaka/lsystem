@@ -1,6 +1,10 @@
 import Turtle from './Turtle';
 import tinycolor from 'tinycolor2';
 
+// We don't want to crash the browser. If the expanded system is larger than this
+// we will stop iteration
+const LIMIT = 1000000;
+
 export default class LSystem {
   constructor(scene, systemSettings) {
     coerceTypes(systemSettings);
@@ -36,12 +40,13 @@ export default class LSystem {
   simulate() {
     let production = this.start;
     let index = 0;
-    while (index < this.depth) {
+    while (index < this.depth && production.length < LIMIT) {
       production = this.iterateRules(production);
       index += 1;
     }
 
     this.production = production;
+    this.complete = production.length < LIMIT;
   }
 
   iterateRules(rule) {
