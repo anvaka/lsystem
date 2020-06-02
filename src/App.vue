@@ -55,10 +55,10 @@
 </div>
         <div class='section border-top'>
         <p>This website renders any L-Systems defined above. The website was created by <a href='https://twitter.com/anvaka'>@anvaka</a>.</p>
+        <p>You can <a href='#' @click.prevent='toSVGFile' >export to svg</a> current scene</p>
         <p>You can find the entire source code <a href='https://github.com/anvaka/lsystem'>here</a>. 
-        If you love this website you can also <a href='https://www.paypal.com/paypalme2/anvakos/3'>buy me a coffee</a>
+        Finally, under condition that you love this website you can <a href='https://www.paypal.com/paypalme2/anvakos/3'>buy me a coffee</a> :)
         </p>
-        <p>Finally, you can <a href='#' @click.prevent='toSVGFile' >export to svg</a> current scene</p>
         </div>
       </div>
     </div>
