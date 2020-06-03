@@ -1,3 +1,12 @@
+/**
+ * This is a very simple parser to parse our "L-system" language
+ * 
+ * It works as a simple state machine, which has two rules:
+ * 
+ * "ExpectKeyValue" and "ExpectRewriteValue". In each state it consumes
+ * a line from the input and either transitions to the next state
+ * or adds new key/values to the current state.
+ */
 const separator = /:|->|=>|=|→/
 const rules = /rules|production rules/i;
 const actions = /actions/i;
@@ -6,6 +15,9 @@ const numericKey = /angle|depth|width|stepsPerFrame/i;
 const vectorKey = /direction|position/i;
 const parens = /[[\]()]/;
 
+/**
+ * Read rewrite rule.
+ */
 class ExpectRewriteValue {
   constructor(addTo, parent, valueParser) {
     this.parent = parent;
@@ -38,6 +50,9 @@ function extractAction(stringValue) {
   return {name, args};
 }
 
+/**
+ * Expect arbitrary key/value line.
+ */
 class ExpectKeyValue {
   constructor(addTo) {
     this.addTo = addTo;

@@ -16,7 +16,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
   var lSystemMode = parserConfig.lsystem;
   var isTS = parserConfig.typescript;
   var wordRE = parserConfig.wordCharacters || /[\w$\xa1-\uffff]/;
-  var ruleCharRE = /[a-zA-Z+_^?~|&*%\][-]/;
+  var ruleCharRE = /[a-zA-Z+_^?~<>|&*%\][-]/;
 
   // Tokenizer
 
