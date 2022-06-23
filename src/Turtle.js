@@ -45,16 +45,12 @@ export default class Turtle {
     p[0] = x; p[1] = y; p[2] = z;
   }
 
-  draw(distance,color) {
+  draw(distance) {
     let p = this.position;
     let n = this.direction;
     let x = p[0] + distance * n[0];
     let y = p[1] + distance * n[1];
     let z = p[2] + distance * n[2];
-    //console.log(distance);
-    //console.log(color);
-    //console.log(this.color);
-    if (color) this.color = color;
     this.lines.add({
       from: p, 
       to: [x, y, z],
