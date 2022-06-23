@@ -84,6 +84,9 @@ function compileActions(systemSettings, lSystem) {
     '-': {name: 'rotate', args: [-defaultRotationAngle]},
     '[': {name: 'push', args: []},
     ']': {name: 'pop', args: []},
+    'c': {name: 'chcolor', args: []},
+    'd': {name: 'chcolor', args: []},
+    'e': {name: 'chcolor', args: []},
     ...systemSettings.actions
   }
 
@@ -120,6 +123,13 @@ function turtleCanDo(command, lSystem) {
     }
   }
 
+  if (command.name === 'chcolor') {
+    let color = command.args[0];
+    return function() {
+      lSystem.turtle.chcolor(color)
+    }
+  }
+
   if (command.name === 'push') return function() {lSystem.turtle.push()}
   if (command.name === 'pop') return function() {lSystem.turtle.pop()}
   if (command.name === 'move') {
@@ -133,7 +143,7 @@ function getLength(value, name) {
   let length = 10;
   if (value !== undefined) {
     length = value;
-    if (!Number.isFinite(length)) throw new Error(name  +'(l) expects `l` to be a float number. Got: ' + value);
+     if (!Number.isFinite(length)) throw new Error(name  +'(l) expects `l` to be a float number. Got: ' + value);
   }
   return length;
 }

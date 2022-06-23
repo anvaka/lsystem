@@ -1,4 +1,5 @@
 import LineCollection from './LineCollection';
+import tinycolor from 'tinycolor2';
 
 export default class Turtle {
   constructor(scene, options = {}) {
@@ -44,12 +45,16 @@ export default class Turtle {
     p[0] = x; p[1] = y; p[2] = z;
   }
 
-  draw(distance) {
+  draw(distance,color) {
     let p = this.position;
     let n = this.direction;
     let x = p[0] + distance * n[0];
     let y = p[1] + distance * n[1];
     let z = p[2] + distance * n[2];
+    //console.log(distance);
+    //console.log(color);
+    //console.log(this.color);
+    if (color) this.color = color;
     this.lines.add({
       from: p, 
       to: [x, y, z],
@@ -58,6 +63,15 @@ export default class Turtle {
 
     p[0] = x; p[1] = y; p[2] = z;
     this.scene.renderFrame();
+  }
+
+  chcolor(hue) {
+    let list = Object.values(tinycolor.names); 
+    let color = "#";
+    color+= list[hue];
+    let rgba = tinycolor(color).toRgb();
+    color = (rgba.r << 24) | (rgba.g << 16) | (rgba.b << 8) | (rgba.a * 255 | 0)
+    this.color = color;
   }
 
   rotateZ(angleInDegrees) {
