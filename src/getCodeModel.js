@@ -49,6 +49,18 @@ rules:
 
 direction: [0, 1, 0]
 angle: 22.5`,
+`// Tree with color
+axiom: X
+rules: 
+ F => FF
+ X => F-[[X]+X]+cF[+dFX]-X
+
+color:brown
+direction: [0, 1, 0]
+angle: 22.5a
+actions:
+  c => chcolor(26)
+  d => chcolor(83) `,
 `// Hilbert curve
 axiom: X
 rules: 
