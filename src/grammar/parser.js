@@ -46,8 +46,23 @@ function extractAction(stringValue) {
     throw new Error('Expected `action()` call, got: ' + stringValue);
   }
   let name = m[1];
-  let args = !m[2] ? [] : m[2].split(',').map(v => Number.parseFloat(v.trim()));
+  let args;
+  if (!m[2]) args = []; 
+  else {
+    args = m[2].split(',').map(v => {
+      let stringValue = extractStringValue(v);
+      if (stringValue !== undefined) return stringValue;
+      return Number.parseFloat(v.trim());
+    });
+  }
   return {name, args};
+}
+
+function extractStringValue(value) {
+  let matchedString = (value && value.match(/\s*(?:'(.*?)'|"(.*?)")\s*/));
+  if (matchedString) {
+    return matchedString[1] || matchedString[2];
+  }
 }
 
 /**

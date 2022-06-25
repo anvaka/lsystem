@@ -61,13 +61,14 @@ export default class Turtle {
     this.scene.renderFrame();
   }
 
-  chcolor(hue) {
-    let list = Object.values(tinycolor.names); 
-    let color = "#";
-    color+= list[hue];
-    let rgba = tinycolor(color).toRgb();
-    color = (rgba.r << 24) | (rgba.g << 16) | (rgba.b << 8) | (rgba.a * 255 | 0)
-    this.color = color;
+  setColor(newColorValue) {
+    if (newColorValue === undefined) {
+      throw new Error('setColor() expects color value, got undefined');
+    }
+    const rgba = tinycolor(typeof newColorValue === 'number' ? 
+      Object.values(tinycolor.names)[newColorValue] : newColorValue
+    ).toRgb();
+    this.color = (rgba.r << 24) | (rgba.g << 16) | (rgba.b << 8) | (rgba.a * 255 | 0)
   }
 
   rotateZ(angleInDegrees) {

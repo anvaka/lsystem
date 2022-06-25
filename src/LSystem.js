@@ -84,9 +84,6 @@ function compileActions(systemSettings, lSystem) {
     '-': {name: 'rotate', args: [-defaultRotationAngle]},
     '[': {name: 'push', args: []},
     ']': {name: 'pop', args: []},
-    'c': {name: 'chcolor', args: []},
-    'd': {name: 'chcolor', args: []},
-    'e': {name: 'chcolor', args: []},
     ...systemSettings.actions
   }
 
@@ -123,10 +120,10 @@ function turtleCanDo(command, lSystem) {
     }
   }
 
-  if (command.name === 'chcolor') {
+  if (command.name.match(/chcolor|setcolor/i)) {
     let color = command.args[0];
     return function() {
-      lSystem.turtle.chcolor(color)
+      lSystem.turtle.setColor(color)
     }
   }
 
