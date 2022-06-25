@@ -34,8 +34,8 @@ rules:
 depth: 4
 angle: 72
 actions:
-  c => setcolor("mediumpurple")
-  d => setcolor("violet") `,
+  c => setColor("mediumpurple")
+  d => setColor("violet") `,
 
 `// William McWorters Pentant
 axiom: X-X-X-X-X
@@ -47,8 +47,8 @@ rules:
 depth: 3
 angle: 72
 actions:
-  c => setcolor("goldenrod")
-  d => setcolor("gold") `,
+  c => setColor("goldenrod")
+  d => setColor("gold") `,
 
 `// William McWorter Sierπnski Carpet 
 axiom: F
@@ -59,8 +59,8 @@ rules:
 angle: 90
 depth: 4
 actions:
-  c => setcolor("goldenrod")
-  d => setcolor("gold") `,
+  c => setColor("goldenrod")
+  d => setColor("gold") `,
 
 `// Hexagonal Gosper
 axiom: X
@@ -115,8 +115,8 @@ color:brown
 direction: [0, 1, 0]
 angle: 22.5a
 actions:
-  c => setcolor('green')
-  d => setcolor('lightgreen')`,
+  c => setColor('green')
+  d => setColor('lightgreen')`,
 
 `// Bush, after P. Bourke
 axiom: Y
@@ -128,9 +128,9 @@ color: brown
 direction: [0, 1, 0]
 angle: 22.5
 actions:
-  c => setcolor('green')
-  d => setcolor('lime')
-  e => setcolor('brown')`,
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('brown')`,
 
 `// Bush, P. Bourke
 axiom: F
@@ -142,9 +142,9 @@ direction: [0, 1, 0]
 angle: 21
 depth:4
 actions:
-  c => setcolor('green')
-  d => setcolor('lime')
-  e => setcolor('brown')`,
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('brown')`,
 
 `// P. Bourkes Pentaplexy
 axiom: F++F++F++F++F
@@ -154,8 +154,8 @@ rules:
 depth:4
 angle: 36
 actions:
-  c => setcolor('mediumpurple')
-  d => setcolor('violet')`,
+  c => setColor('mediumpurple')
+  d => setColor('violet')`,
 
 `// poetasters shrub
 axiom: F
@@ -167,9 +167,9 @@ direction: [0, 1, 0]
 angle: 322
 depth: 4
 actions:
-  c => setcolor('green')
-  d => setcolor('lightgreen')
-  e => setcolor('brown')`,
+  c => setColor('green')
+  d => setColor('lightgreen')
+  e => setColor('brown')`,
 
 ` //Unlikely bush (after Bourke)
 axiom: F
@@ -181,9 +181,9 @@ direction: [0, 1, 0]
 angle: 330
 depth:4
 actions:
-  c => setcolor('green')
-  d => setcolor('lime')
-  e => setcolor('brown')`,
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('brown')`,
 `// Weed, P. Bourke
 axiom: F
 rules:
@@ -195,8 +195,8 @@ color: brown
 direction: [0, 1, 1]
 angle: 22.5
 actions:
-  c => setcolor('green')
-  d => setcolor('lime')`,
+  c => setColor('green')
+  d => setColor('lime')`,
 
 `//  P. Bourke after Saupe
 axiom: VZFFF
@@ -212,8 +212,8 @@ depth:8
 direction: [0, 1, 0]
 angle: 20
 actions:
-  c => setcolor('green')
-  d => setcolor('lime')`,
+  c => setColor('green')
+  d => setColor('lime')`,
 
 `//Pyramids, Anthony Hanmer ADH258a 
 axiom: F++F++F+++F--F--F
@@ -224,8 +224,8 @@ color: gold
 angle: 60
 depth:3
 actions:
-  c => setcolor('gold')
-  d => setcolor('goldenrod')`,
+  c => setColor('gold')
+  d => setColor('goldenrod')`,
 
 `// Hilbert curve
 axiom: X
@@ -242,8 +242,8 @@ rules:
 angle: 45
 depth: 12
 actions:
-  c => setcolor("goldenrod")
-  d => setcolor("gold")`,
+  c => setColor("goldenrod")
+  d => setColor("gold")`,
 
 `// blocks
 axiom: F+F+F+F
@@ -263,8 +263,8 @@ rules:
 angle: 90
 depth: 2
 actions:
-  c => setcolor("goldenrod")
-  d => setcolor("gold")`,
+  c => setColor("goldenrod")
+  d => setColor("gold")`,
 
 `//Color Mosaic
 axiom: F+F+F+F
@@ -275,8 +275,8 @@ color: green
 depth: 3
 angle: 90
 actions:
-  c => setcolor('lime')
-  d => setcolor('green')`,
+  c => setColor('lime')
+  d => setColor('green')`,
 
 `// 3 Blocks
 axiom: F^^F^^F
