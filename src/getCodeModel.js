@@ -59,8 +59,8 @@ color:brown
 direction: [0, 1, 0]
 angle: 22.5a
 actions:
-  c => chcolor(26)
-  d => chcolor(83) `,
+  c => setcolor('green')
+  d => setcolor('lightgreen')`,
 `// Hilbert curve
 axiom: X
 rules: 
