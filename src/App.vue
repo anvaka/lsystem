@@ -26,7 +26,7 @@
                   <li><strong>rotateY(deg)</strong> rotate current direction <code>deg</code> degrees around Y axis</li>
                   <li><strong>push()</strong> saves current render state onto stack</li>
                   <li><strong>pop()</strong> restores previously saved render state</li>
-                  <li><strong>setcolor(color)</strong> set the current color value, '#ffa500' or 'orange'.</li>
+                  <li><strong>setColor(color)</strong> set the current color value, '#ffa500' or 'orange'.</li>
                 </ul>
 
                 <p>By default the following actions are added automatically:</p>
