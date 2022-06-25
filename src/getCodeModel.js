@@ -18,6 +18,50 @@ rules:
 depth: 10
 angle: 90`,
 
+`// William McWorters Terdragon
+axiom: F
+rules: 
+ F => F+F-F
+
+depth: 8
+angle: 120`,
+
+`// William McWorters Pentl
+axiom: F-F-F-F-F
+rules: 
+  F => cF-F-F++dF+F-F 
+
+depth: 4
+angle: 72
+actions:
+  c => setcolor("mediumpurple")
+  d => setcolor("violet") `,
+
+`// William McWorters Pentant
+axiom: X-X-X-X-X
+rules: 
+  F => 
+  X => dFX-FX-FX+FY+FY+FX-FX
+  Y => cFY+FY-FX-FX-FY+FY+FY
+
+depth: 3
+angle: 72
+actions:
+  c => setcolor("goldenrod")
+  d => setcolor("gold") `,
+
+`// William McWorter Sierπnski Carpet 
+axiom: F
+rules: 
+ F => cF+F-F-F-f+dF+F+F-F
+ f => fff
+
+angle: 90
+depth: 4
+actions:
+  c => setcolor("goldenrod")
+  d => setcolor("gold") `,
+
 `// Hexagonal Gosper
 axiom: X
 rules:
@@ -32,15 +76,27 @@ rules:
  X => XFYFX-F-YFXFY+F+XFYFX
  Y => YFXFY+F+XFYFX-F-YFXFY
 
+depth:4
 angle: 90`,
+
+`// Gary Teachout Pean-c
+axiom: FX
+rules:
+ F => 
+ X =>  FX-FY-FX+FY+FX+FY+FX+FY+FX-FY-FX-FY-FX-FY-FX+FY+FX
+ Y => FY
+
+depth: 3
+angle: 45`,
+
 `// Square Sierpinski
 axiom: F+XF+F+XF
 rules: 
  X => XF-F+F-XF+F+XF-F+F-X
 
 depth: 4
-angle: 90
-`,
+angle: 90 `,
+
 `// Tree
 axiom: X
 rules: 
@@ -49,6 +105,128 @@ rules:
 
 direction: [0, 1, 0]
 angle: 22.5`,
+`// Tree with color
+axiom: X
+rules: 
+ F => FF
+ X => F-[[X]+X]+cF[+dFX]-X
+
+color:brown
+direction: [0, 1, 0]
+angle: 22.5a
+actions:
+  c => setcolor('green')
+  d => setcolor('lightgreen')`,
+
+`// Bush, after P. Bourke
+axiom: Y
+rules: 
+  X => X[-FFF]c[+FFF]FX
+  Y => dYFXe[+Y][-Y]
+
+color: brown
+direction: [0, 1, 0]
+angle: 22.5
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')
+  e => setcolor('brown')`,
+
+`// Bush, P. Bourke
+axiom: F
+rules: 
+  F => eFF+[c+F-F-F]-[d-F+F+F]
+
+color: brown
+direction: [0, 1, 0]
+angle: 21
+depth:4
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')
+  e => setcolor('brown')`,
+
+`// P. Bourkes Pentaplexy
+axiom: F++F++F++F++F
+rules: 
+  F => cF++F++F+++++dF-F++F
+
+depth:4
+angle: 36
+actions:
+  c => setcolor('mediumpurple')
+  d => setcolor('violet')`,
+
+`// poetasters shrub
+axiom: F
+rules: 
+ F => Fe[+cFF]Fd[-FF]cF
+
+color:brown
+direction: [0, 1, 0]
+angle: 322
+depth: 4
+actions:
+  c => setcolor('green')
+  d => setcolor('lightgreen')
+  e => setcolor('brown')`,
+
+` //Unlikely bush (after Bourke)
+axiom: F
+rules: 
+  F => eF[+cFF][-FF]cF[-F]d[+F]F
+
+color: brown
+direction: [0, 1, 0]
+angle: 330
+depth:4
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')
+  e => setcolor('brown')`,
+`// Weed, P. Bourke
+axiom: F
+rules:
+  F -> FF-[XY]+[XY]
+  X -> +cFY
+  Y -> -dFX
+
+color: brown
+direction: [0, 1, 1]
+angle: 22.5
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')`,
+
+`//  P. Bourke after Saupe
+axiom: VZFFF
+rules:
+  V -> [+++W][---W]YV
+  W -> +X[-W]Z
+  X -> -W[+X]Z
+  Y -> YZ
+  Z -> [-FcFF][+FdFF]F
+
+color: brown
+depth:8
+direction: [0, 1, 0]
+angle: 20
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')`,
+
+`//Pyramids, Anthony Hanmer ADH258a 
+axiom: F++F++F+++F--F--F
+rules: 
+  F =>  cFF++F++F++dFFF
+
+color: gold
+angle: 60
+depth:3
+actions:
+  c => setcolor('gold')
+  d => setcolor('goldenrod')`,
+
 `// Hilbert curve
 axiom: X
 rules: 
@@ -56,6 +234,16 @@ rules:
  Y => +XF-YFY-FX+
 
 angle: 90`,
+
+`// Levey Curve
+axiom: F++F++F++F
+rules: 
+  F => -dF++cF-
+angle: 45
+depth: 12
+actions:
+  c => setcolor("goldenrod")
+  d => setcolor("gold")`,
 
 `// blocks
 axiom: F+F+F+F
@@ -65,6 +253,31 @@ rules:
 
 angle: 90
 depth: 3 `,
+
+`// aztec blocks
+axiom: F-F-F-F
+rules: 
+ F => F-cf+FF-F-FF-Ff-FF+df-FF+F+FF+Ff+FFF
+ f => ffffff
+
+angle: 90
+depth: 2
+actions:
+  c => setcolor("goldenrod")
+  d => setcolor("gold")`,
+
+`//Color Mosaic
+axiom: F+F+F+F
+rules: 
+  F => dFF+F+cF+F+FF
+
+color: green
+depth: 3
+angle: 90
+actions:
+  c => setcolor('lime')
+  d => setcolor('green')`,
+
 `// 3 Blocks
 axiom: F^^F^^F
 rules: 
@@ -75,8 +288,8 @@ depth: 3
 actions:
  - => rotate(-90)
  ^ => rotate(60)
- & => rotate(-60)
-`, `// Leaf
+ & => rotate(-60) `,
+`// Leaf
 axiom: Y---Y
 rules: 
  X => F-FF-F--[--X]F-FF-F--F-FF-F--
