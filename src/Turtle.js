@@ -1,4 +1,5 @@
 import LineCollection from './LineCollection';
+import tinycolor from 'tinycolor2';
 
 export default class Turtle {
   constructor(scene, options = {}) {
@@ -58,6 +59,15 @@ export default class Turtle {
 
     p[0] = x; p[1] = y; p[2] = z;
     this.scene.renderFrame();
+  }
+
+  chcolor(hue) {
+    let list = Object.values(tinycolor.names); 
+    let color = "#";
+    color+= list[hue];
+    let rgba = tinycolor(color).toRgb();
+    color = (rgba.r << 24) | (rgba.g << 16) | (rgba.b << 8) | (rgba.a * 255 | 0)
+    this.color = color;
   }
 
   rotateZ(angleInDegrees) {
