@@ -82,6 +82,7 @@ function compileActions(systemSettings, lSystem) {
     'f': {name: 'move', args: []},
     '+': {name: 'rotate', args: [defaultRotationAngle]},
     '-': {name: 'rotate', args: [-defaultRotationAngle]},
+    '&': {name: 'swapAngle', args: [-defaultRotationAngle]},
     '[': {name: 'push', args: []},
     ']': {name: 'pop', args: []},
     ...systemSettings.actions
@@ -120,7 +121,7 @@ function turtleCanDo(command, lSystem) {
     }
   }
 
-  if (command.name.match(/chcolor|setcolor/i)) {
+  if (command.name.match(/chcolor|setColor/i)) {
     let color = command.args[0];
     return function() {
       lSystem.turtle.setColor(color)
@@ -132,6 +133,9 @@ function turtleCanDo(command, lSystem) {
   if (command.name === 'move') {
     let length = getLength(command.args[0], 'move');
     return function() {lSystem.turtle.move(length)}
+  }
+  if (command.name.match(/swapAngle/i)) {
+    return function() {lSystem.turtle.swapAngle()}
   }
 }
 
