@@ -27,6 +27,7 @@
                   <li><strong>push()</strong> saves current render state onto stack</li>
                   <li><strong>pop()</strong> restores previously saved render state</li>
                   <li><strong>setColor(color)</strong> set the current color value, '#ffa500' or 'orange'.</li>
+                  <li><strong>swapAngle()</strong> swaps the meaning of `+` and `-`.</li>
                 </ul>
 
                 <p>By default the following actions are added automatically:</p>
@@ -35,6 +36,7 @@
   f => move(10)
   + => rotate(60)
   - => rotate(-60)
+  & => swapAngle()
   [ => push()
   ] => pop()
 </code></pre>

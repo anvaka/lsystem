@@ -15,6 +15,7 @@ export default class Turtle {
 
     this.scene.appendChild(this.lines);
     this.stack = [];
+    this.invertZYAngle = false;
   }
 
   push() {
@@ -72,6 +73,7 @@ export default class Turtle {
   }
 
   rotateZ(angleInDegrees) {
+    if (this.invertZYAngle) angleInDegrees *= -1;
     let rad = Math.PI * angleInDegrees / 180;
     let n = this.direction;
 
@@ -83,6 +85,7 @@ export default class Turtle {
   }
 
   rotateY(angleInDegrees) {
+    if (this.invertZYAngle) angleInDegrees *= -1;
     let rad = Math.PI * angleInDegrees / 180;
     let n = this.direction;
 
@@ -102,6 +105,10 @@ export default class Turtle {
 
     n[1] = y;
     n[2]= z;
+  }
+
+  swapAngle() {
+    this.invertZYAngle = !this.invertZYAngle;
   }
 }
 
