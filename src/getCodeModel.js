@@ -230,6 +230,23 @@ angle: 20
 actions:
   c => setColor('green')
   d => setColor('lime')`,
+
+` // poetaster's curly, inspired by  McWorter
+axiom: F+F-F+F
+rules: 
+  F => eF-F-F++[cF+F-dF[GGG]][GGG]
+  G => c--g--g--g--g--g--g--g
+
+depth: 2
+angle: 27
+width:2
+direction: [0,0.1,0.1]
+actions:
+  c => setColor("palegreen")
+  d => setColor("violet") 
+  e => setColor("green")
+  g => draw(2)`,
+
 `// aquatic plant
 axiom: F
 rules:
