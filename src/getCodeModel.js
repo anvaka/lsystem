@@ -264,6 +264,27 @@ actions:
   x => rotatex(2)
   y => rotatey(-3)`,
 
+`// poetasters third aquatic
+axiom: F
+rules:
+  F -> FMNxQRyQR[O-O-O-O-0]
+  M => d[++FF+FF+]
+  N => d[--FF-FF-]
+  O => e[F-F-F++dF+F-F]
+  Q => c++F--F
+  R => c--F++F
+
+color: brown
+direction: [0, 1, 0.5]
+angle: 17
+depth:4
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')
+  e => setcolor('goldenrod')
+  x => rotatex(2)
+  y => rotatey(-1.5)`,
+
 `// poetasters sallow thorn
 axiom: F
 rules:
