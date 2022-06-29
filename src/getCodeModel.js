@@ -135,16 +135,15 @@ actions:
 `// Bush, P. Bourke
 axiom: F
 rules: 
-  F => eFF+[c+F-F-F]-[d-F+F+F]
+  F => FF+[c+F-F-F]-[-F+F+dF]
 
-color: brown
+color: green
 direction: [0, 1, 0]
 angle: 21
 depth:4
 actions:
   c => setColor('green')
-  d => setColor('lime')
-  e => setColor('brown')`,
+  d => setColor('lime')`,
 
 `// P. Bourkes Pentaplexy
 axiom: F++F++F++F++F
