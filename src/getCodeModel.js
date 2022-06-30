@@ -185,7 +185,7 @@ actions:
   c => setColor('green')
   d => setColor('lime')`,
 
-` //Unlikely bush (after Bourke)
+`// Unlikely bush (after Bourke)
 axiom: F
 rules: 
   F => eF[+cFF][-FF]cF[-F]d[+F]F
@@ -213,7 +213,7 @@ actions:
   c => setColor('green')
   d => setColor('lime')`,
 
-`//  P. Bourke after Saupe
+`// P. Bourke after Saupe
 axiom: VZFFF
 rules:
   V -> [+++W][---W]YV
@@ -230,7 +230,7 @@ actions:
   c => setColor('green')
   d => setColor('lime')`,
 
-` // poetaster's curly, inspired by  McWorter
+`// poetaster's curly, inspired by  McWorter
 axiom: F+F-F+F
 rules: 
   F => eF-F-F++[cF+F-dF[GGG]][GGG]
@@ -362,7 +362,7 @@ actions:
   g => rotate(4.5)
   h => rotate(-3)`,
 
-`//Pyramids, Anthony Hanmer ADH258a 
+`// Pyramids, Anthony Hanmer ADH258a 
 axiom: F++F++F+++F--F--F
 rules: 
   F =>  cFF++F++F++dFFF
@@ -413,7 +413,7 @@ actions:
   c => setColor("goldenrod")
   d => setColor("gold")`,
 
-`//Color Mosaic
+`// Color Mosaic
 axiom: F+F+F+F
 rules: 
   F => dFF+F+cF+F+FF
