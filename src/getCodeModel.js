@@ -135,16 +135,15 @@ actions:
 `// Bush, P. Bourke
 axiom: F
 rules: 
-  F => eFF+[c+F-F-F]-[d-F+F+F]
+  F => FF+[c+F-F-F]-[-F+F+dF]
 
-color: brown
+color: green
 direction: [0, 1, 0]
 angle: 21
 depth:4
 actions:
   c => setColor('green')
-  d => setColor('lime')
-  e => setColor('brown')`,
+  d => setColor('lime')`,
 
 `// P. Bourkes Pentaplexy
 axiom: F++F++F++F++F
@@ -171,6 +170,21 @@ actions:
   d => setColor('lightgreen')
   e => setColor('brown')`,
 
+`// poetasters weed, after, P. Bourke
+axiom: F
+rules:
+  F -> F-[XY]+[XY]F+[XY]-[XY]
+  X -> +dFY
+  Y -> -cFX
+
+color: brown
+direction: [0, 1, 0.5]
+angle: 22.5
+depth:5
+actions:
+  c => setColor('green')
+  d => setColor('lime')`,
+
 ` //Unlikely bush (after Bourke)
 axiom: F
 rules: 
@@ -184,6 +198,7 @@ actions:
   c => setColor('green')
   d => setColor('lime')
   e => setColor('brown')`,
+
 `// Weed, P. Bourke
 axiom: F
 rules:
@@ -214,6 +229,138 @@ angle: 20
 actions:
   c => setColor('green')
   d => setColor('lime')`,
+
+` // poetaster's curly, inspired by  McWorter
+axiom: F+F-F+F
+rules: 
+  F => eF-F-F++[cF+F-dF[GGG]][GGG]
+  G => c--g--g--g--g--g--g--g
+
+depth: 2
+angle: 27
+width:2
+direction: [0,0.1,0.1]
+actions:
+  c => setColor("palegreen")
+  d => setColor("violet") 
+  e => setColor("green")
+  g => draw(2)`,
+
+`// aquatic plant
+axiom: F
+rules:
+  F -> FFc[-F++F]d[+F--F]e++F--F
+
+color: brown
+direction: [0, 1, 0.5]
+angle: 27
+depth:4
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('goldenrod')`,
+
+`// another aquatic 
+axiom: F
+rules:
+  F => FMNOMBxPNMyO
+  M => e[-F++F++]
+  N => d[+F--F--]
+  O => c++F--F
+  P => d--F++F
+
+color: brown
+direction: [0, 1, 0.5]
+angle: 27
+depth:5
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('goldenrod')
+  x => rotatex(2)
+  y => rotatey(-3)`,
+
+`// poetasters third aquatic
+axiom: F
+rules:
+  F -> FMNxQRyQR[O-O-O-O-0]
+  M => d[++FF+FF+]
+  N => d[--FF-FF-]
+  O => e[F-F-F++dF+F-F]
+  Q => c++F--F
+  R => c--F++F
+
+color: brown
+direction: [0, 1, 0.5]
+angle: 17
+depth:4
+actions:
+  c => setcolor('green')
+  d => setcolor('lime')
+  e => setcolor('goldenrod')
+  x => rotatex(2)
+  y => rotatey(-1.5)`,
+
+`// poetasters sallow thorn
+axiom: F
+rules:
+  F -> FMNxQRyQROP
+  M => d[++FF+FF+]
+  N => d[--FF-FF-]
+  O => e[-F++F++]
+  P => e[+F--F--]
+  Q => c++F--F
+  R => c--F++F
+
+color: brown
+direction: [0, 1, 0.5]
+angle: 17
+depth:5
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('goldenrod')
+  x => rotatex(2)
+  y => rotatey(-1.5)`,
+
+`// Pean-c flower after Gary Teachout
+axiom: FXhFXiFX
+rules:
+ F => 
+ X =>  [FX-FY][-cFX-FY-FX][ZZ]-dFY-FX+FY+FX
+ Y => FY
+ Z => -cFX-FY-FX
+
+color: green
+depth: 3
+angle: 340
+width: 2
+direction: [1,1,1]
+actions:
+  c => setColor("violet")
+  d => setColor("lime")
+  h => rotate(5)
+  i => rotate(-3)`,
+
+`// poetasters succulent 1
+axiom: A
+rules:
+ A =>[FL]gAhg[FLA]
+ F => cSF 
+ S => dFL
+ L => c[F+F+F]fe[F-F-F]
+
+color:green
+direction: [0, 1, 0.5]
+width: 4
+angle: 17
+depth: 7
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('lightgreen')
+  g => rotate(4.5)
+  h => rotate(-3)`,
 
 `//Pyramids, Anthony Hanmer ADH258a 
 axiom: F++F++F+++F--F--F
