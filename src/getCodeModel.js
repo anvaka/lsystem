@@ -277,8 +277,8 @@ actions:
   c => setColor('green')
   d => setColor('lime')
   e => setColor('goldenrod')
-  x => rotatex(2)
-  y => rotatey(-3)`,
+  x => rotateX(2)
+  y => rotateY(-3)`,
 
 `// poetasters third aquatic
 axiom: F
@@ -295,11 +295,11 @@ direction: [0, 1, 0.5]
 angle: 17
 depth:4
 actions:
-  c => setcolor('green')
-  d => setcolor('lime')
-  e => setcolor('goldenrod')
-  x => rotatex(2)
-  y => rotatey(-1.5)`,
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('goldenrod')
+  x => rotateX(2)
+  y => rotateY(-1.5)`,
 
 `// poetasters sallow thorn
 axiom: F
@@ -320,8 +320,8 @@ actions:
   c => setColor('green')
   d => setColor('lime')
   e => setColor('goldenrod')
-  x => rotatex(2)
-  y => rotatey(-1.5)`,
+  x => rotateX(2)
+  y => rotateY(-1.5)`,
 
 `// Pean-c flower after Gary Teachout
 axiom: FXhFXiFX
