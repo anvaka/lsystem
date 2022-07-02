@@ -89,10 +89,10 @@ export default class LineCollection extends GLCollection {
               count > 0 ? this.program.get(0).color : 0xFFFFFFFF;
 
     return [
-      (c >> 24) & 0xFF / 255,
-      (c >> 16) & 0xFF / 255,
-      (c >>  8) & 0xFF / 255,
-      (c >>  0) & 0xFF / 255,
+      ((c >> 24) & 0xFF) / 255,
+      ((c >> 16) & 0xFF) / 255,
+      ((c >>  8) & 0xFF) / 255,
+      ((c >>  0) & 0xFF) / 255,
     ]
   }
 }
