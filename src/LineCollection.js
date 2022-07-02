@@ -56,6 +56,7 @@ export default class LineCollection extends GLCollection {
     });
     super(program);
     this.width = options.width || 2;
+    this.multiColorSegment = true;
   }
 
   draw(_, drawContext) {
