@@ -131,6 +131,7 @@ actions:
   c => setColor('green')
   d => setColor('lime')
   e => setColor('brown')`,
+
 ` // Grains, after P. Bourke
 axiom: Y
 rules: 
@@ -145,6 +146,21 @@ actions:
   d => setColor('lime')
   e => setColor('lightgreen')
   g => rotate(0.3)`,
+
+` // Grains 2, after P. Bourke
+axiom: Y
+rules: 
+  X => cX[-FF-F]g[+FF+F]dFX
+  Y => eYFX[+Y][-Y]XFY
+
+depth:4
+direction: [0, 1, 0]
+angle: 27
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('gold')
+  g => rotate(0.2)`,
 
 `// Bush, P. Bourke
 axiom: F
@@ -164,7 +180,7 @@ axiom: F++F++F++F++F
 rules: 
   F => cF++F++F+++++dF-F++F
 
-depth:4
+depth:3
 angle: 36
 actions:
   c => setColor('mediumpurple')
