@@ -132,6 +132,36 @@ actions:
   d => setColor('lime')
   e => setColor('brown')`,
 
+` // Grains, after P. Bourke
+axiom: Y
+rules: 
+  X => dX[-F+FF]cg[+F-FF]dFX
+  Y => eYFX[+Y][-Y]
+
+depth:5
+direction: [0, 1, 0]
+angle: 27
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('lightgreen')
+  g => rotate(0.3)`,
+
+` // Grains 2, after P. Bourke
+axiom: Y
+rules: 
+  X => cX[-FF-F]g[+FF+F]dFX
+  Y => eYFX[+Y][-Y]XFY
+
+depth:4
+direction: [0, 1, 0]
+angle: 27
+actions:
+  c => setColor('green')
+  d => setColor('lime')
+  e => setColor('gold')
+  g => rotate(0.2)`,
+
 `// Bush, P. Bourke
 axiom: F
 rules: 
@@ -150,7 +180,7 @@ axiom: F++F++F++F++F
 rules: 
   F => cF++F++F+++++dF-F++F
 
-depth:4
+depth:3
 angle: 36
 actions:
   c => setColor('mediumpurple')
@@ -193,7 +223,7 @@ rules:
 color: brown
 direction: [0, 1, 0]
 angle: 330
-depth:4
+depth:3
 actions:
   c => setColor('green')
   d => setColor('lime')
@@ -222,12 +252,12 @@ rules:
   Y -> YZ
   Z -> [-FcFF][+FdFF]F
 
-color: brown
+color: green
 depth:8
 direction: [0, 1, 0]
 angle: 20
 actions:
-  c => setColor('green')
+  c => setColor('lightgreen')
   d => setColor('lime')`,
 
 `// poetaster's curly, inspired by  McWorter
@@ -236,10 +266,10 @@ rules:
   F => eF-F-F++[cF+F-dF[GGG]][GGG]
   G => c--g--g--g--g--g--g--g
 
-depth: 2
-angle: 27
+depth: 3
+angle: 17
 width:2
-direction: [0,0.1,0.1]
+direction: [-0.5,0.7,-0.5]
 actions:
   c => setColor("palegreen")
   d => setColor("violet") 
@@ -270,7 +300,7 @@ rules:
   P => d--F++F
 
 color: brown
-direction: [0, 1, 0.5]
+direction: [0, 1, -1]
 angle: 27
 depth:5
 actions:
@@ -291,7 +321,7 @@ rules:
   R => c--F++F
 
 color: brown
-direction: [0, 1, 0.5]
+direction: [0, 1, -1]
 angle: 17
 depth:4
 actions:
@@ -313,8 +343,8 @@ rules:
   R => c--F++F
 
 color: brown
-direction: [0, 1, 0.5]
-angle: 17
+direction: [0.5, 1, -1]
+angle: 27
 depth:5
 actions:
   c => setColor('green')
