@@ -27,7 +27,6 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "tap": "^14.10.7",
     "vue-template-compiler": "^2.6.11"
   }
 }
