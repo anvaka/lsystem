@@ -18,6 +18,37 @@ rules:
 depth: 10
 angle: 90`,
 
+`// not violets
+axiom: Y
+rules:
+  X => cX[-dF-eF]g[+dF+eF]
+  Y => YFX[+Y][-Y]XFY
+
+depth:5
+direction: [0, 1, 0]
+angle: 27
+actions:
+  c => setColor('green')
+  d => setColor('lightgreen')
+  e => setColor('violet')
+  g => rotate(0.5)`,
+
+` // not violets 2,
+axiom: Y
+rules:
+  X => c[-dF-eF]Yg[+eF+F]Y
+  Y => cY+FX[+Y][-Y]X-FY
+
+depth:4
+direction: [0.5, 1, 0]
+angle: 27
+actions:
+  c => setColor('green')
+  d => setColor('lightgreen')
+  e => setColor('lime')
+  g => rotate(-1)`,
+
+
 `// William McWorters Terdragon
 axiom: F
 rules: 
