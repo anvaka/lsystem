@@ -29,9 +29,8 @@ export default class LSystem {
   }
 
   dispose() {
-    this.aCtx.suspend();
+    this.audioCtx.suspend();
     this.turtle.dispose();
-    this.turtle.turtleAudio.dispose();
   }
 
   frame() {

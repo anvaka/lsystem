@@ -3,7 +3,8 @@ export default class TurtleAudio {
       this.playing= false;
       // the Ctx is passed from LSystem -> Turtle -> this
       this.aCtx= audioCtx;
-      this.notes = [261.63, 329.63, 146.83, 185.0, 164.81, 207.65, 174.61, 220.0, 196.0, 246.94, 220.0, 138.59, 246.94, 155.56];
+      this.notesLower = [138.5, 146.83, 185.0, 164.81, 207.65, 174.61, 220.0, 196.0, 138.59, 246.94, 155.56].sort();
+      this.notesUpper = [220.0, 246.94, 329.63, 246.94, 261.63, 392.43, 327.03, 441.493, 392.43,  441.49].sort();
       this.freq1= 261.63;
       this.freq2= 329.63;
       this.wave1= 'sine';
@@ -12,6 +13,7 @@ export default class TurtleAudio {
       this.osc2= null;
       this.mainGain= 0.01;
       this.debug= false;
+
     }
     setupAudio() {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -20,6 +22,7 @@ export default class TurtleAudio {
     playPause() {
       if (!this.playing) {
         this.playing = true;
+        this.aCtx.resume();
 
         this.mainGainNode = this.aCtx.createGain();
         this.mainGainNode.gain.value = this.mainGain;
@@ -39,7 +42,20 @@ export default class TurtleAudio {
         this.playing = false;
         this.osc1.stop();
         this.osc2.stop();
+        this.aCtx.suspend();
       }
+    }
+    selectUpper(note){
+        let random = this.notesUpper[Math.floor((Math.random()*this.notesUpper.length))];
+        let select = random;//Math.max(random,note) ;
+        //console.log(select);
+        return select;
+    }
+    selectLower(note){
+        let random = this.notesLower[Math.floor((Math.random()*this.notesLower.length))];
+        let select = random;//Math.min(random,note) ;
+        //console.log(select);
+        return select;
     }
     updateGain() {
       this.mainGainNode.gain.linearRampToValueAtTime(this.mainGain,0.1);
@@ -130,6 +146,7 @@ export default class TurtleAudio {
       console.log("TurtleAudio dispose called");
       this.osc1.stop();
       this.osc2.stop();
+      this.aCtx.suspend();
     }
 }
 

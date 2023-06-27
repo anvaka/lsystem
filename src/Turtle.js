@@ -38,8 +38,8 @@ export default class Turtle {
   }
 
   dispose() {
+    this.turtleAudio.playPause();
     this.turtleAudio.dispose();
-    this.audioCtx.suspend(); 
     this.scene.removeChild(this.lines);
   }
 
@@ -66,6 +66,11 @@ export default class Turtle {
 
     p[0] = x; p[1] = y; p[2] = z;
     this.scene.renderFrame();
+    /* audio */
+    this.turtleAudio.freq1 = this.turtleAudio.freq1 + (distance * n[0]) ;
+    if ( this.turtleAudio.freq1 > 1000 )
+      this.turtleAudio.freq1 = 138.5 
+    this.turtleAudio.updateFreq1();
   }
 
   setColor(newColorValue) {
@@ -82,15 +87,16 @@ export default class Turtle {
     if (this.invertZYAngle) angleInDegrees *= -1;
     let rad = Math.PI * angleInDegrees / 180;
     let n = this.direction;
-
     let x = Math.cos(rad) * n[0] - Math.sin(rad) * n[1];
     let y = Math.sin(rad) * n[0] + Math.cos(rad) * n[1];
 
     n[0] = x;
     n[1] = y;
-    this.turtleAudio.freq1 = this.turtleAudio.freq1 + angleInDegrees/8 + 0.1;
-    this.turtleAudio.updateFreq1();
-    this.turtleAudio.freq2 = this.turtleAudio.freq2 - angleInDegrees/8 + 0.1;
+
+    /* audio */
+    this.turtleAudio.freq2 = this.turtleAudio.freq2 - (angleInDegrees/8) ;
+    if ( this.turtleAudio.freq1 < 100 )
+      this.turtleAudio.freq1 = 838.5 
     this.turtleAudio.updateFreq2();
   }
 
@@ -104,10 +110,9 @@ export default class Turtle {
 
     n[0] = x;
     n[2] = z;
-    this.turtleAudio.freq1 = this.turtleAudio.freq - angleInDegrees/8 + 0.1;
-    this.turtleAudio.updateFreq1();
-    this.turtleAudio.freq2 = this.turtleAudio.freq2 + angleInDegrees/8 + 0.1;
-    this.turtleAudio.updateFreq2();
+    /* audio */
+    //this.turtleAudio.freq2 = this.turtleAudio.freq2 + angleInDegrees/8 + 0.1;
+    //this.turtleAudio.updateFreq2();
   }
 
   rotateX(angleInDegrees) {
@@ -119,10 +124,9 @@ export default class Turtle {
 
     n[1] = y;
     n[2]= z;
-    this.turtleAudio.freq1 = this.turtleAudio.freq + angleInDegrees/8 + 0.1;
-    this.turtleAudio.updateFreq1();
-    this.turtleAudio.freq2 = this.turtleAudio.freq2 - angleInDegrees/8 + 0.1;
-    this.turtleAudio.updateFreq2();
+    /* audio */
+    //this.turtleAudio.freq1 = this.turtleAudio.freq + angleInDegrees/8 + 0.1;
+    //this.turtleAudio.updateFreq1();
   }
 
   swapAngle() {
