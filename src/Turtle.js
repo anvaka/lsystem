@@ -1,8 +1,9 @@
 import LineCollection from './LineCollection';
 import tinycolor from 'tinycolor2';
+import TurtleAudio from './TurtleAudio';
 
 export default class Turtle {
-  constructor(scene, options = {}) {
+  constructor(scene, options = {}, audioCtx) {
     this.position = options.position || [0, 0, 0];
     checkArray('position', this.position);
     this.direction = options.direction || [1, 0, 0];
@@ -16,6 +17,9 @@ export default class Turtle {
     this.scene.appendChild(this.lines);
     this.stack = [];
     this.invertZYAngle = false;
+    this.audioCtx = audioCtx;
+    this.turtleAudio = new TurtleAudio( {}, audioCtx);
+    this.turtleAudio.playPause();
   }
 
   push() {
@@ -34,6 +38,8 @@ export default class Turtle {
   }
 
   dispose() {
+    this.turtleAudio.dispose();
+    this.audioCtx.suspend(); 
     this.scene.removeChild(this.lines);
   }
 
@@ -82,6 +88,10 @@ export default class Turtle {
 
     n[0] = x;
     n[1] = y;
+    this.turtleAudio.freq1 = this.turtleAudio.freq1 + angleInDegrees/8 + 0.1;
+    this.turtleAudio.updateFreq1();
+    this.turtleAudio.freq2 = this.turtleAudio.freq2 - angleInDegrees/8 + 0.1;
+    this.turtleAudio.updateFreq2();
   }
 
   rotateY(angleInDegrees) {
@@ -94,6 +104,10 @@ export default class Turtle {
 
     n[0] = x;
     n[2] = z;
+    this.turtleAudio.freq1 = this.turtleAudio.freq - angleInDegrees/8 + 0.1;
+    this.turtleAudio.updateFreq1();
+    this.turtleAudio.freq2 = this.turtleAudio.freq2 + angleInDegrees/8 + 0.1;
+    this.turtleAudio.updateFreq2();
   }
 
   rotateX(angleInDegrees) {
@@ -105,6 +119,10 @@ export default class Turtle {
 
     n[1] = y;
     n[2]= z;
+    this.turtleAudio.freq1 = this.turtleAudio.freq + angleInDegrees/8 + 0.1;
+    this.turtleAudio.updateFreq1();
+    this.turtleAudio.freq2 = this.turtleAudio.freq2 - angleInDegrees/8 + 0.1;
+    this.turtleAudio.updateFreq2();
   }
 
   swapAngle() {

@@ -10,7 +10,10 @@ export default class LSystem {
     coerceTypes(systemSettings);
     this.rules = systemSettings.rules;
     this.actions = compileActions(systemSettings, this);
-    this.turtle = new Turtle(scene, systemSettings);
+    /* audio for Turtle */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    this.audioCtx = new AudioContext();
+    this.turtle = new Turtle(scene, systemSettings, this.audioCtx );
     this.stepsPerFrame = systemSettings.stepsPerFrame || 42;
     this.drawQueue = [];
     this.lastDrawnIndex = -1;
@@ -26,7 +29,9 @@ export default class LSystem {
   }
 
   dispose() {
+    this.aCtx.suspend();
     this.turtle.dispose();
+    this.turtle.turtleAudio.dispose();
   }
 
   frame() {
